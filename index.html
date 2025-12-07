@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REDMUSIC | Top 20 Artistas 2025 (Dados em Tempo Real)</title>
+    <title>REDMUSIC | Top 20 Artistas 2025</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Jost:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         /* CSS Otimizado para Design Futurista e Profissional */
@@ -79,6 +79,11 @@
             border-radius: 6px;
             position: relative;
         }
+        
+        /* Destaque para o Top 3 */
+        .artist-item:nth-child(-n+3) {
+            border-left: 3px solid var(--color-accent-blue);
+        }
 
         .rank-number {
             font-family: 'Space Mono', monospace;
@@ -113,33 +118,6 @@
             text-align: right;
         }
 
-        /* Indicadores de Mudança (Tempo Real) */
-        .rank-up .rank-number { color: #33FF99; } /* Verde para Subir */
-        .rank-down .rank-number { color: #FF3366; } /* Vermelho para Descer */
-
-        .rank-up .rank-number::after {
-            content: '▲';
-            font-size: 0.7em;
-            margin-left: 5px;
-        }
-        
-        .rank-down .rank-number::after {
-            content: '▼';
-            font-size: 0.7em;
-            margin-left: 5px;
-        }
-
-        .animated-change {
-            /* Adicionado !important para forçar a aplicação da animação */
-            animation: flash-update 1s ease-in-out !important; 
-        }
-        
-        @keyframes flash-update {
-            0% { background-color: rgba(255, 51, 102, 0.2); }
-            50% { background-color: var(--color-card); }
-            100% { background-color: rgba(255, 51, 102, 0.2); }
-        }
-
         /* Responsividade */
         @media (max-width: 600px) {
             .header {
@@ -159,133 +137,173 @@
         <div class="logo">REDMUSIC</div>
         <div class="header-info">
             <h1>RANKING MUNDIAL YOUTUBE 2025</h1>
-            <p class="update-status">Dados em Tempo Real | Última Atualização: <span id="real-time-status">...</span></p>
+            <p class="update-status">DADOS ESTÁTICOS | Referência: Dezembro 2025</p>
         </div>
     </div>
 
     <ul id="ranking-list">
+        <li class="artist-item">
+            <span class="rank-number">01</span>
+            <div class="artist-info">
+                <span class="artist-name">Taylor Swift</span>
+                <span class="artist-genre">Pop / Country-Pop</span>
+            </div>
+            <span class="streams-count">16.3 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">02</span>
+            <div class="artist-info">
+                <span class="artist-name">Ariana Grande</span>
+                <span class="artist-genre">Pop / R&B</span>
+            </div>
+            <span class="streams-count">14.9 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">03</span>
+            <div class="artist-info">
+                <span class="artist-name">BLACKPINK</span>
+                <span class="artist-genre">K-Pop / Dance</span>
+            </div>
+            <span class="streams-count">13.8 B</span>
+        </li>
+        
+        <li class="artist-item">
+            <span class="rank-number">04</span>
+            <div class="artist-info">
+                <span class="artist-name">Dua Lipa</span>
+                <span class="artist-genre">Pop / Dance-Pop</span>
+            </div>
+            <span class="streams-count">12.1 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">05</span>
+            <div class="artist-info">
+                <span class="artist-name">Karol G</span>
+                <span class="artist-genre">Reggaeton / Urbano Latino</span>
+            </div>
+            <span class="streams-count">11.5 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">06</span>
+            <div class="artist-info">
+                <span class="artist-name">Shakira</span>
+                <span class="artist-genre">Pop Latino / Dance</span>
+            </div>
+            <span class="streams-count">10.9 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">07</span>
+            <div class="artist-info">
+                <span class="artist-name">Beyoncé</span>
+                <span class="artist-genre">R&B / Pop</span>
+            </div>
+            <span class="streams-count">10.2 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">08</span>
+            <div class="artist-info">
+                <span class="artist-name">Rihanna</span>
+                <span class="artist-genre">R&B / Pop</span>
+            </div>
+            <span class="streams-count">9.8 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">09</span>
+            <div class="artist-info">
+                <span class="artist-name">Katy Perry</span>
+                <span class="artist-genre">Pop</span>
+            </div>
+            <span class="streams-count">9.4 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">10</span>
+            <div class="artist-info">
+                <span class="artist-name">Nicki Minaj</span>
+                <span class="artist-genre">Hip-Hop / Rap</span>
+            </div>
+            <span class="streams-count">9.0 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">11</span>
+            <div class="artist-info">
+                <span class="artist-name">Lady Gaga</span>
+                <span class="artist-genre">Pop / Dance</span>
+            </div>
+            <span class="streams-count">8.5 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">12</span>
+            <div class="artist-info">
+                <span class="artist-name">Billie Eilish</span>
+                <span class="artist-genre">Alternative Pop</span>
+            </div>
+            <span class="streams-count">7.9 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">13</span>
+            <div class="artist-info">
+                <span class="artist-name">Adele</span>
+                <span class="artist-genre">Soul / Pop</span>
+            </div>
+            <span class="streams-count">7.5 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">14</span>
+            <div class="artist-info">
+                <span class="artist-name">Doja Cat</span>
+                <span class="artist-genre">R&B / Hip-Hop</span>
+            </div>
+            <span class="streams-count">6.8 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">15</span>
+            <div class="artist-info">
+                <span class="artist-name">Marília Mendonça</span>
+                <span class="artist-genre">Sertanejo / Sofrência</span>
+            </div>
+            <span class="streams-count">6.5 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">16</span>
+            <div class="artist-info">
+                <span class="artist-name">Lana Del Rey</span>
+                <span class="artist-genre">Alternative / Indie Pop</span>
+            </div>
+            <span class="streams-count">6.1 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">17</span>
+            <div class="artist-info">
+                <span class="artist-name">Sia</span>
+                <span class="artist-genre">Pop / Indie Pop</span>
+            </div>
+            <span class="streams-count">5.7 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">18</span>
+            <div class="artist-info">
+                <span class="artist-name">Selena Gomez</span>
+                <span class="artist-genre">Pop</span>
+            </div>
+            <span class="streams-count">5.4 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">19</span>
+            <div class="artist-info">
+                <span class="artist-name">Sabrina Carpenter</span>
+                <span class="artist-genre">Pop</span>
+            </div>
+            <span class="streams-count">5.0 B</span>
+        </li>
+        <li class="artist-item">
+            <span class="rank-number">20</span>
+            <div class="artist-info">
+                <span class="artist-name">Tyla</span>
+                <span class="artist-genre">Amapiano / R&B</span>
+            </div>
+            <span class="streams-count">4.8 B</span>
+        </li>
     </ul>
 </div>
-
-<script>
-    // ----------------------------------------------------------------------------------
-    // JAVASCRIPT: Lógica de Simulação de Tempo Real
-    // O Vercel executará este script normalmente no servidor
-    // ----------------------------------------------------------------------------------
-
-    const baseArtists = [
-        { name: 'Taylor Swift', genre: 'Pop / Country', streams: 15000000000, id: 1 },
-        { name: 'BLACKPINK', genre: 'K-Pop / Grupo Feminino', streams: 14500000000, id: 2 },
-        { name: 'Shakira', genre: 'Pop Latino / Dance', streams: 13000000000, id: 3 },
-        { name: 'Ariana Grande', genre: 'Pop / R&B', streams: 12500000000, id: 4 },
-        { name: 'Katy Perry', genre: 'Pop', streams: 11500000000, id: 5 },
-        { name: 'Karol G', genre: 'Reggaeton / Urbano Latino', streams: 11000000000, id: 6 },
-        { name: 'Rihanna', genre: 'R&B / Pop', streams: 10500000000, id: 7 },
-        { name: 'Adele', genre: 'Soul / Pop', streams: 10000000000, id: 8 },
-        { name: 'Billie Eilish', genre: 'Alternative Pop', streams: 9500000000, id: 9 },
-        { name: 'Lady Gaga', genre: 'Pop / Dance', streams: 9000000000, id: 10 },
-        { name: 'Marília Mendonça', genre: 'Sertanejo / Sofrência', streams: 8500000000, id: 11 },
-        { name: 'Beyoncé', genre: 'R&B / Pop', streams: 8000000000, id: 12 },
-        { name: 'Dua Lipa', genre: 'Pop / Dance-Pop', streams: 7500000000, id: 13 },
-        { name: 'Nicki Minaj', genre: 'Hip-Hop / Rap', streams: 7000000000, id: 14 },
-        { name: 'Sia', genre: 'Pop / Indie Pop', streams: 6500000000, id: 15 },
-        { name: 'Lana Del Rey', genre: 'Alternative / Indie Pop', streams: 6000000000, id: 16 },
-        { name: 'Selena Gomez', genre: 'Pop', streams: 5500000000, id: 17 },
-        { name: 'Sabrina Carpenter', genre: 'Pop', streams: 5000000000, id: 18 },
-        { name: 'Doja Cat', genre: 'Pop / R&B / Hip-Hop', streams: 4500000000, id: 19 },
-        { name: 'Tyla', genre: 'Amapiano / R&B', streams: 4000000000, id: 20 }
-    ];
-
-    let previousRankingMap = new Map();
-    const listElement = document.getElementById('ranking-list');
-
-    // Funções Auxiliares
-    function fetchRealTimeData() {
-        let newArtists = JSON.parse(JSON.stringify(baseArtists));
-        
-        // Simulação de crescimento de streams
-        newArtists.forEach(artist => {
-            // Adiciona um valor aleatório para forçar a mudança de ranking
-            artist.streams += Math.floor(Math.random() * 495000000) + 5000000;
-        });
-
-        // Ordena para obter o ranking mais recente
-        newArtists.sort((a, b) => b.streams - a.streams);
-        return newArtists;
-    }
-
-    function formatStreams(num) {
-        if (num >= 1000000000) {
-            return (num / 1000000000).toFixed(2).replace('.', ',') + ' B';
-        }
-        if (num >= 1000000) {
-            return (num / 1000000).toFixed(2).replace('.', ',') + ' M';
-        }
-        return num.toLocaleString('pt-BR');
-    }
-
-    // Função de Renderização Principal
-    function renderRanking(currentRanking) {
-        // CORREÇÃO FINAL: Limpa a lista antes de renderizar
-        listElement.innerHTML = ''; 
-
-        const currentRankingMap = new Map();
-        
-        currentRanking.forEach((artist, index) => {
-            const rank = index + 1;
-            currentRankingMap.set(artist.id, rank);
-            
-            const listItem = document.createElement('li');
-            listItem.className = 'artist-item';
-
-            let rankChangeClass = '';
-            // Se já houve um ranking anterior, verifica a posição
-            if (previousRankingMap.has(artist.id)) {
-                const previousRank = previousRankingMap.get(artist.id);
-                
-                if (previousRank > rank) {
-                    rankChangeClass = 'rank-up animated-change'; 
-                } else if (previousRank < rank) {
-                    rankChangeClass = 'rank-down animated-change'; 
-                }
-            }
-            
-            listItem.classList.add(rankChangeClass);
-
-            const formattedStreams = formatStreams(artist.streams);
-
-            listItem.innerHTML = `
-                <span class="rank-number">${String(rank).padStart(2, '0')}</span>
-                <div class="artist-info">
-                    <span class="artist-name">${artist.name}</span>
-                    <span class="artist-genre">${artist.genre}</span>
-                </div>
-                <span class="streams-count">${formattedStreams}</span>
-            `;
-
-            listElement.appendChild(listItem);
-        });
-
-        // Atualiza o estado anterior para a próxima comparação
-        previousRankingMap = currentRankingMap;
-        document.getElementById('real-time-status').textContent = new Date().toLocaleTimeString('pt-BR');
-    }
-
-    // Inicialização da Aplicação
-    function init() {
-        // Carrega o ranking inicial Imediatamente
-        const initialRanking = fetchRealTimeData();
-        renderRanking(initialRanking);
-
-        // Configura a atualização contínua a cada 5 segundos
-        setInterval(() => {
-            const newRanking = fetchRealTimeData();
-            renderRanking(newRanking);
-        }, 5000); 
-    }
-
-    // Inicia a aplicação após o DOM estar totalmente carregado
-    window.addEventListener('load', init); 
-</script>
 </body>
 </html>
