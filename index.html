@@ -6,16 +6,16 @@
     <title>REDMUSIC | Global Ranking Data</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
-        /* PALETA: High-Contrast Minimalista (Preto, Branco, Azul Cobalt) */
+        /* PALETA: High-Contrast Minimalista (Preto, Branco, VERMELHO NEON) */
         :root {
             --color-dark-bg: #0A0A0A; /* Preto Extremo */
             --color-panel: #181818; /* Cinza Escuro Suave */
-            --color-accent: #00BFFF; /* Azul Cobalto (Principal) */
+            --color-accent: #FF3366; /* VERMELHO NEON (Principal) */
             --color-text: #FFFFFF; /* Branco Puro */
             --color-subtle: #9E9E9E; /* Cinza para detalhes */
             --font-main: 'Inter', sans-serif;
             --font-mono: 'Roboto Mono', monospace;
-            --shadow-glow: 0 0 8px rgba(0, 191, 255, 0.4);
+            --shadow-glow: 0 0 8px rgba(255, 51, 102, 0.6); /* Sombra vermelha */
         }
 
         body {
@@ -23,7 +23,7 @@
             background-color: var(--color-dark-bg);
             color: var(--color-text);
             margin: 0;
-            padding: 20px 10px; /* Reduzido o padding em mobile */
+            padding: 20px 10px;
             display: flex;
             justify-content: center;
             min-height: 100vh;
@@ -42,20 +42,20 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+            flex-wrap: wrap;
         }
 
         .logo {
             font-family: var(--font-main);
             font-size: 2em;
             font-weight: 800;
-            color: var(--color-accent);
+            color: var(--color-accent); /* Destaque VERMELHO */
             text-shadow: var(--shadow-glow);
             letter-spacing: 1px;
         }
 
         .header-info h1 {
-            font-size: 1.2em; /* Reduzido para mobile */
+            font-size: 1.2em;
             font-weight: 600;
             margin: 0;
             color: var(--color-text);
@@ -94,7 +94,7 @@
 
         .artist-item {
             display: grid;
-            grid-template-columns: 50px 1fr 100px; /* Layout principal */
+            grid-template-columns: 50px 1fr 100px;
             align-items: center;
             background-color: var(--color-panel);
             padding: 15px 20px;
@@ -105,13 +105,13 @@
         }
 
         .artist-item:hover {
-            border-color: var(--color-accent);
+            border-color: var(--color-accent); /* Borda VERMELHA ao passar o mouse */
             background-color: #252525;
         }
         
         /* Destaque para o Top 3 */
         .artist-item:nth-child(-n+3) {
-            border-left: 3px solid var(--color-accent);
+            border-left: 3px solid var(--color-accent); /* Borda VERMELHA */
         }
         .artist-item:nth-child(1) .rank-number { color: #FFD700; font-size: 2.2em; } /* Ouro */
         .artist-item:nth-child(2) .rank-number { color: #C0C0C0; font-size: 2.0em; } /* Prata */
@@ -148,14 +148,13 @@
             font-family: var(--font-mono);
             font-size: 1em;
             font-weight: 600;
-            color: var(--color-accent);
+            color: var(--color-accent); /* Streams em VERMELHO */
             text-align: right;
         }
 
         /* RESPONSIVIDADE (Telas Menores) */
         @media (max-width: 480px) {
             .artist-item {
-                /* Layout para mobile: Rank | Nome/Gênero | Streams */
                 grid-template-columns: 40px 1fr 80px;
                 padding: 12px 10px;
             }
