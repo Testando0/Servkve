@@ -6,15 +6,14 @@
     <title>REDMUSIC | Top 20 Artistas 2025 (Dados em Tempo Real)</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Jost:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS Otimizado para Design Futurista e Profissional */
         :root {
             --color-dark: #0A0A10;
             --color-card: #151520;
-            --color-red: #FF3366; /* Vermelho/Rosa Neon - Primary */
+            --color-red: #FF3366; /* Vermelho Neon - Primary */
             --color-text: #EAEAEF;
             --color-light-grey: #AAAAAA;
             --color-accent-blue: #00CCFF; /* Azul Ciano - Contraste */
-            --shadow-glow: 0 0 10px rgba(255, 51, 102, 0.4);
-            --transition-speed: 0.4s;
         }
 
         body {
@@ -26,16 +25,13 @@
             display: flex;
             justify-content: center;
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .dashboard-main {
             width: 100%;
             max-width: 900px;
-            background-color: var(--color-dark);
         }
 
-        /* Título e Header */
         .header {
             padding-bottom: 20px;
             margin-bottom: 30px;
@@ -50,18 +46,13 @@
             font-size: 2.2em;
             font-weight: 700;
             color: var(--color-red);
-            text-shadow: var(--shadow-glow);
+            text-shadow: 0 0 10px rgba(255, 51, 102, 0.4);
             letter-spacing: 3px;
-        }
-
-        .header-info {
-            text-align: right;
         }
 
         .header-info h1 {
             font-size: 1.6em;
             font-weight: 500;
-            color: var(--color-text);
             margin: 0;
         }
 
@@ -71,7 +62,6 @@
             font-family: 'Space Mono', monospace;
         }
 
-        /* Lista de Ranking */
         #ranking-list {
             list-style: none;
             padding: 0;
@@ -82,32 +72,22 @@
 
         .artist-item {
             display: grid;
-            grid-template-columns: 50px 3fr 1fr; /* Rank | Nome/Gênero | Streams */
+            grid-template-columns: 50px 3fr 1fr;
             align-items: center;
             background-color: var(--color-card);
             padding: 15px 20px;
             border-radius: 6px;
-            transition: background-color var(--transition-speed), transform var(--transition-speed);
             position: relative;
         }
 
-        .artist-item:hover {
-            background-color: #252535;
-            transform: translateY(-2px);
-            border-left: 3px solid var(--color-red);
-        }
-
-        /* Coluna do Rank */
         .rank-number {
             font-family: 'Space Mono', monospace;
             font-size: 1.5em;
             font-weight: 700;
             color: var(--color-red);
-            text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
             text-align: center;
         }
 
-        /* Coluna do Artista */
         .artist-info {
             padding-left: 15px;
             border-left: 1px solid rgba(255, 255, 255, 0.1);
@@ -116,7 +96,6 @@
         .artist-name {
             font-size: 1.15em;
             font-weight: 700;
-            color: var(--color-text);
             display: block;
         }
 
@@ -126,35 +105,30 @@
             font-style: italic;
         }
 
-        /* Coluna de Streams */
         .streams-count {
             font-family: 'Space Mono', monospace;
             font-size: 1em;
             font-weight: 700;
             color: var(--color-accent-blue);
             text-align: right;
-            padding-left: 10px;
         }
 
         /* Indicadores de Mudança (Tempo Real) */
-        .rank-up .rank-number { color: #33FF99; /* Verde para Subir */ }
-        .rank-down .rank-number { color: #FF3366; /* Vermelho para Descer */ }
+        .rank-up .rank-number { color: #33FF99; } /* Verde para Subir */
+        .rank-down .rank-number { color: #FF3366; } /* Vermelho para Descer */
 
         .rank-up .rank-number::after {
             content: '▲';
-            color: #33FF99;
             font-size: 0.7em;
             margin-left: 5px;
         }
         
         .rank-down .rank-number::after {
             content: '▼';
-            color: #FF3366;
             font-size: 0.7em;
             margin-left: 5px;
         }
 
-        /* Animação para Artista Recém-Atualizado */
         .animated-change {
             /* Adicionado !important para forçar a aplicação da animação */
             animation: flash-update 1s ease-in-out !important; 
@@ -172,19 +146,8 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
-            .header-info {
-                text-align: left;
-                margin-top: 10px;
-            }
             .artist-item {
                 grid-template-columns: 40px 1fr 80px;
-                padding: 12px 10px;
-            }
-            .artist-name {
-                font-size: 1em;
-            }
-            .streams-count {
-                font-size: 0.9em;
             }
         }
     </style>
@@ -205,7 +168,11 @@
 </div>
 
 <script>
-    // LISTA INICIAL DE ARTISTAS E DADOS
+    // ----------------------------------------------------------------------------------
+    // JAVASCRIPT: Lógica de Simulação de Tempo Real
+    // O Vercel executará este script normalmente no servidor
+    // ----------------------------------------------------------------------------------
+
     const baseArtists = [
         { name: 'Taylor Swift', genre: 'Pop / Country', streams: 15000000000, id: 1 },
         { name: 'BLACKPINK', genre: 'K-Pop / Grupo Feminino', streams: 14500000000, id: 2 },
@@ -232,14 +199,17 @@
     let previousRankingMap = new Map();
     const listElement = document.getElementById('ranking-list');
 
+    // Funções Auxiliares
     function fetchRealTimeData() {
         let newArtists = JSON.parse(JSON.stringify(baseArtists));
         
-        // Simulação: Adiciona um valor aleatório para forçar a mudança de ranking
+        // Simulação de crescimento de streams
         newArtists.forEach(artist => {
+            // Adiciona um valor aleatório para forçar a mudança de ranking
             artist.streams += Math.floor(Math.random() * 495000000) + 5000000;
         });
 
+        // Ordena para obter o ranking mais recente
         newArtists.sort((a, b) => b.streams - a.streams);
         return newArtists;
     }
@@ -254,11 +224,11 @@
         return num.toLocaleString('pt-BR');
     }
 
-    // Função de renderização principal (Corrigida para injetar diretamente)
+    // Função de Renderização Principal
     function renderRanking(currentRanking) {
-        listElement.innerHTML = ''; // Limpa a lista existente
+        // CORREÇÃO FINAL: Limpa a lista antes de renderizar
+        listElement.innerHTML = ''; 
 
-        // 1. Criar o novo mapa de ranking para o estado atual
         const currentRankingMap = new Map();
         
         currentRanking.forEach((artist, index) => {
@@ -268,15 +238,15 @@
             const listItem = document.createElement('li');
             listItem.className = 'artist-item';
 
-            // 2. Determinar a classe de mudança de ranking
             let rankChangeClass = '';
+            // Se já houve um ranking anterior, verifica a posição
             if (previousRankingMap.has(artist.id)) {
                 const previousRank = previousRankingMap.get(artist.id);
                 
                 if (previousRank > rank) {
-                    rankChangeClass = 'rank-up animated-change'; // Subiu
+                    rankChangeClass = 'rank-up animated-change'; 
                 } else if (previousRank < rank) {
-                    rankChangeClass = 'rank-down animated-change'; // Desceu
+                    rankChangeClass = 'rank-down animated-change'; 
                 }
             }
             
@@ -296,27 +266,26 @@
             listElement.appendChild(listItem);
         });
 
-        // 3. Atualizar o estado anterior
+        // Atualiza o estado anterior para a próxima comparação
         previousRankingMap = currentRankingMap;
-
-        // 4. Atualizar o status de tempo
         document.getElementById('real-time-status').textContent = new Date().toLocaleTimeString('pt-BR');
     }
 
-    // Função de inicialização
+    // Inicialização da Aplicação
     function init() {
-        // Carrega o ranking inicial
-        renderRanking(fetchRealTimeData());
+        // Carrega o ranking inicial Imediatamente
+        const initialRanking = fetchRealTimeData();
+        renderRanking(initialRanking);
 
-        // Configura a atualização em tempo real (a cada 5 segundos)
+        // Configura a atualização contínua a cada 5 segundos
         setInterval(() => {
             const newRanking = fetchRealTimeData();
             renderRanking(newRanking);
-        }, 5000); // 5 segundos
+        }, 5000); 
     }
 
-    // Inicia a aplicação
-    init();
+    // Inicia a aplicação após o DOM estar totalmente carregado
+    window.addEventListener('load', init); 
 </script>
 </body>
 </html>
