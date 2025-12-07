@@ -137,21 +137,17 @@
         }
 
         /* Indicadores de Mudança (Tempo Real) */
-        .rank-up, .rank-down {
-            transition: all var(--transition-speed);
-        }
-
         .rank-up .rank-number { color: #33FF99; /* Verde para Subir */ }
         .rank-down .rank-number { color: #FF3366; /* Vermelho para Descer */ }
 
-        .rank-up::after {
+        .rank-up .rank-number::after {
             content: '▲';
             color: #33FF99;
             font-size: 0.7em;
             margin-left: 5px;
         }
         
-        .rank-down::after {
+        .rank-down .rank-number::after {
             content: '▼';
             color: #FF3366;
             font-size: 0.7em;
@@ -160,13 +156,14 @@
 
         /* Animação para Artista Recém-Atualizado */
         .animated-change {
-            animation: flash-update 1s ease-in-out;
+            /* Adicionado !important para forçar a aplicação da animação */
+            animation: flash-update 1s ease-in-out !important; 
         }
         
         @keyframes flash-update {
-            0% { background-color: rgba(255, 51, 102, 0.2); transform: scale(1.01); }
-            50% { background-color: var(--color-card); transform: scale(1.0); }
-            100% { background-color: rgba(255, 51, 102, 0.2); transform: scale(1.01); }
+            0% { background-color: rgba(255, 51, 102, 0.2); }
+            50% { background-color: var(--color-card); }
+            100% { background-color: rgba(255, 51, 102, 0.2); }
         }
 
         /* Responsividade */
@@ -204,11 +201,11 @@
     </div>
 
     <ul id="ranking-list">
-        </ul>
+    </ul>
 </div>
 
 <script>
-    // LISTA INICIAL DE ARTISTAS E DADOS (SERIA A BASE DE DADOS REAL)
+    // LISTA INICIAL DE ARTISTAS E DADOS
     const baseArtists = [
         { name: 'Taylor Swift', genre: 'Pop / Country', streams: 15000000000, id: 1 },
         { name: 'BLACKPINK', genre: 'K-Pop / Grupo Feminino', streams: 14500000000, id: 2 },
@@ -232,51 +229,42 @@
         { name: 'Tyla', genre: 'Amapiano / R&B', streams: 4000000000, id: 20 }
     ];
 
-    // Variável para armazenar o estado anterior (usando um mapa para fácil lookup de posição)
     let previousRankingMap = new Map();
+    const listElement = document.getElementById('ranking-list');
 
-    // Função para buscar/simular a atualização dos dados
     function fetchRealTimeData() {
-        // Clonar e modificar a lista (SIMULAÇÃO DE DADOS ATUAIS)
         let newArtists = JSON.parse(JSON.stringify(baseArtists));
         
-        // Adicionar um valor aleatório (streams) para simular o crescimento e a mudança de ranking
+        // Simulação: Adiciona um valor aleatório para forçar a mudança de ranking
         newArtists.forEach(artist => {
-            // Streams aleatórias entre 5 milhões e 500 milhões
             artist.streams += Math.floor(Math.random() * 495000000) + 5000000;
         });
 
-        // Ordenar a nova lista para obter o ranking atualizado
         newArtists.sort((a, b) => b.streams - a.streams);
-
         return newArtists;
     }
 
-    // Função para formatar números grandes em B (Bilhão) ou M (Milhão)
     function formatStreams(num) {
         if (num >= 1000000000) {
-            return (num / 1000000000).toFixed(2) + ' B';
+            return (num / 1000000000).toFixed(2).replace('.', ',') + ' B';
         }
         if (num >= 1000000) {
-            return (num / 1000000).toFixed(2) + ' M';
+            return (num / 1000000).toFixed(2).replace('.', ',') + ' M';
         }
         return num.toLocaleString('pt-BR');
     }
 
-    // Função principal para renderizar e animar
+    // Função de renderização principal (Corrigida para injetar diretamente)
     function renderRanking(currentRanking) {
-        const listElement = document.getElementById('ranking-list');
-        const newList = document.createElement('ul');
-        newList.id = 'ranking-list';
+        listElement.innerHTML = ''; // Limpa a lista existente
 
         // 1. Criar o novo mapa de ranking para o estado atual
         const currentRankingMap = new Map();
-        currentRanking.forEach((artist, index) => {
-            currentRankingMap.set(artist.id, index + 1);
-        });
-
+        
         currentRanking.forEach((artist, index) => {
             const rank = index + 1;
+            currentRankingMap.set(artist.id, rank);
+            
             const listItem = document.createElement('li');
             listItem.className = 'artist-item';
 
@@ -305,22 +293,19 @@
                 <span class="streams-count">${formattedStreams}</span>
             `;
 
-            newList.appendChild(listItem);
+            listElement.appendChild(listItem);
         });
 
-        // 3. Substituir a lista antiga pela nova (atualização visual)
-        listElement.parentNode.replaceChild(newList, listElement);
-
-        // 4. Atualizar o estado anterior
+        // 3. Atualizar o estado anterior
         previousRankingMap = currentRankingMap;
 
-        // 5. Atualizar o status de tempo
+        // 4. Atualizar o status de tempo
         document.getElementById('real-time-status').textContent = new Date().toLocaleTimeString('pt-BR');
     }
 
     // Função de inicialização
     function init() {
-        // Carrega o ranking inicial sem animação de mudança
+        // Carrega o ranking inicial
         renderRanking(fetchRealTimeData());
 
         // Configura a atualização em tempo real (a cada 5 segundos)
