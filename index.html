@@ -3,424 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REDMUSIC - Top Artistas 2025</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <title>REDMUSIC - Top 20 Artistas 2025 (Live)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d0d1a;
-            --primary-color: #e50050; /* Vermelho futurista da Redmusic */
-            --secondary-color: #00e5e5; /* Azul ciano para contraste */
-            --text-color: #e0e0e0;
-            --light-grey: #a0a0a0;
-            --dark-grey: #2a2a3f;
-            --border-glow: 0 0 8px var(--primary-color), 0 0 16px var(--primary-color);
-            --text-shadow-glow: 0 0 5px var(--primary-color);
+            /* Cores da REDMUSIC: Vermelho (Neon), Cinza Escuro (Fundo), Azul Ciano (Contraste) */
+            --bg-dark: #0A0A15;
+            --primary-red: #FF0054; /* Vermelho Neon Vívido */
+            --accent-cyan: #00FFFF; /* Ciano de Destaque */
+            --text-light: #E0E0E8;
+            --text-muted: #A0A0B0;
+            --card-bg: #1A1A2E;
+            --glow-filter: drop-shadow(0 0 4px rgba(255, 0, 84, 0.7));
         }
 
         body {
-            font-family: 'Share Tech Mono', monospace;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
+            padding: 50px 20px;
             overflow-x: hidden;
-            position: relative;
         }
 
-        /* Efeito de fundo abstrato */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        .dashboard-container {
             width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at top left, var(--dark-grey) 5%, transparent 30%),
-                        radial-gradient(circle at bottom right, var(--dark-grey) 5%, transparent 30%);
-            opacity: 0.3;
-            z-index: 0;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background-color: #1a1a2e; /* Fundo mais escuro para o container */
-            border: 2px solid var(--primary-color);
-            box-shadow: var(--border-glow);
-            padding: 40px 30px;
-            border-radius: 15px;
-            position: relative;
-            z-index: 1;
-            transform: skewX(-5deg); /* Leve inclinação para dar toque futurista */
-            animation: fadeInScale 1s ease-out forwards;
-        }
-
-        .container > * {
-            transform: skewX(5deg); /* Desfazer a inclinação para o conteúdo */
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: skewX(-5deg) scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: skewX(-5deg) scale(1);
-            }
+            max-width: 900px;
+            background-color: #0E0E20;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 0, 84, 0.2);
+            padding: 30px;
+            border: 1px solid rgba(255, 0, 84, 0.2);
         }
 
         .header {
-            text-align: center;
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.8em;
-            color: var(--secondary-color);
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px var(--secondary-color);
-        }
-
-        .header p {
-            font-size: 1.1em;
-            color: var(--light-grey);
-            margin-top: -10px;
-            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary-red);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.5em;
-            color: var(--primary-color);
-            text-shadow: var(--text-shadow-glow);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .logo span {
             font-size: 1.8em;
-            font-weight: bold;
-            line-height: 1;
+            font-weight: 700;
+            color: var(--primary-red);
+            text-shadow: 0 0 8px var(--primary-red);
+            letter-spacing: 2px;
         }
 
-        .artist-list {
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4em;
+            color: var(--text-light);
+            text-transform: uppercase;
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .status {
+            font-size: 0.8em;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 5px var(--accent-cyan);
+        }
+
+        /* Lista de Artistas */
+        #ranking-list {
             list-style: none;
             padding: 0;
             margin: 0;
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 15px;
         }
 
         .artist-item {
             display: flex;
             align-items: center;
-            background-color: var(--dark-grey);
-            border-left: 5px solid var(--primary-color);
+            background-color: var(--card-bg);
             padding: 15px 20px;
             border-radius: 8px;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 5px rgba(0,0,0,0.5);
-        }
-
-        .artist-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(229, 0, 80, 0.2), transparent);
-            transition: all 0.5s ease;
-        }
-
-        .artist-item:hover::before {
-            left: 100%;
         }
 
         .artist-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: var(--border-glow);
-            border-left-color: var(--secondary-color);
+            background-color: #242440;
+            transform: translateY(-3px);
+            border-color: var(--primary-red);
+            box-shadow: 0 0 10px rgba(255, 0, 84, 0.4);
         }
 
-        .rank {
+        /* Indicador de Posição */
+        .rank-number {
             font-family: 'Orbitron', sans-serif;
-            font-size: 2.2em;
-            font-weight: bold;
-            color: var(--primary-color);
+            font-size: 1.6em;
+            font-weight: 700;
+            color: var(--primary-red);
+            min-width: 40px;
+            text-align: left;
             margin-right: 20px;
-            min-width: 50px;
-            text-align: center;
-            text-shadow: var(--text-shadow-glow);
-            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(255, 0, 84, 0.5);
+            transition: color 0.5s;
         }
 
         .artist-info {
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
         }
 
         .artist-name {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 5px;
+            font-size: 1.2em;
+            font-weight: 700;
+            color: var(--text-light);
+            transition: color 0.3s;
         }
 
-        .details {
-            font-size: 0.9em;
-            color: var(--light-grey);
+        .artist-item:hover .artist-name {
+            color: var(--accent-cyan);
         }
 
-        /* Efeito de glitch no título */
-        .glitch {
-            animation: glitch 1.5s infinite;
+        .artist-genre {
+            font-size: 0.85em;
+            color: var(--text-muted);
         }
 
-        @keyframes glitch {
-            0% { text-shadow: none; }
-            2% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            4% { text-shadow: none; }
-            6% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            8% { text-shadow: none; }
-            10% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            12% { text-shadow: none; }
-            14% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            16% { text-shadow: none; }
-            18% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            20% { text-shadow: none; }
-            22% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            24% { text-shadow: none; }
-            26% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            28% { text-shadow: none; }
-            30% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            32% { text-shadow: none; }
-            34% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            36% { text-shadow: none; }
-            38% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            40% { text-shadow: none; }
-            42% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            44% { text-shadow: none; }
-            46% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            48% { text-shadow: none; }
-            50% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            52% { text-shadow: none; }
-            54% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            56% { text-shadow: none; }
-            58% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            60% { text-shadow: none; }
-            62% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            64% { text-shadow: none; }
-            66% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            68% { text-shadow: none; }
-            70% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            72% { text-shadow: none; }
-            74% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            76% { text-shadow: none; }
-            78% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            80% { text-shadow: none; }
-            82% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            84% { text-shadow: none; }
-            86% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            88% { text-shadow: none; }
-            90% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            92% { text-shadow: none; }
-            94% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            96% { text-shadow: none; }
-            98% { text-shadow: 0.05em 0 0 rgba(0,229,229,0.7), -0.05em -0.025em 0 rgba(229,0,80,0.7); }
-            100% { text-shadow: none; }
+        .streams-count {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1em;
+            color: var(--accent-cyan);
+            margin-left: 20px;
+            min-width: 120px;
+            text-align: right;
+        }
+
+        /* Animação para Artista que Sobe/Desce */
+        .rank-up .rank-number { color: #00E676; } /* Verde para subir */
+        .rank-down .rank-number { color: #FF1744; } /* Vermelho para descer */
+        
+        .animated-change {
+            animation: pulse-rank 0.5s 2;
+        }
+
+        @keyframes pulse-rank {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); background-color: rgba(255, 255, 255, 0.1); }
+            100% { transform: scale(1); }
         }
 
         /* Responsividade */
         @media (max-width: 600px) {
-            .container {
-                width: 95%;
-                padding: 25px 15px;
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
             }
             .header h1 {
-                font-size: 2em;
+                padding-left: 0;
+                margin-top: 10px;
             }
-            .rank {
-                font-size: 1.8em;
-                margin-right: 15px;
+            .rank-number {
+                font-size: 1.4em;
+                min-width: 30px;
             }
             .artist-name {
-                font-size: 1.2em;
+                font-size: 1.1em;
             }
-            .details {
-                font-size: 0.8em;
+            .streams-count {
+                font-size: 0.9em;
+                min-width: 80px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo"><span>R</span> REDMUSIC</div>
-            <h1 class="glitch">TOP ARTISTAS MAIS OUVIDOS</h1>
-            <p>AS VOZES QUE DEFINEM 2025</p>
-        </div>
 
-        <ul class="artist-list">
-            <li class="artist-item">
-                <span class="rank">01</span>
-                <div class="artist-info">
-                    <span class="artist-name">Taylor Swift</span>
-                    <span class="details">Pop / Country</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">02</span>
-                <div class="artist-info">
-                    <span class="artist-name">BLACKPINK</span>
-                    <span class="details">K-Pop / Grupo Feminino</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">03</span>
-                <div class="artist-info">
-                    <span class="artist-name">Shakira</span>
-                    <span class="details">Pop Latino / Dance</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">04</span>
-                <div class="artist-info">
-                    <span class="artist-name">Ariana Grande</span>
-                    <span class="details">Pop / R&B</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">05</span>
-                <div class="artist-info">
-                    <span class="artist-name">Katy Perry</span>
-                    <span class="details">Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">06</span>
-                <div class="artist-info">
-                    <span class="artist-name">Karol G</span>
-                    <span class="details">Reggaeton / Urbano Latino</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">07</span>
-                <div class="artist-info">
-                    <span class="artist-name">Rihanna</span>
-                    <span class="details">R&B / Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">08</span>
-                <div class="artist-info">
-                    <span class="artist-name">Adele</span>
-                    <span class="details">Soul / Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">09</span>
-                <div class="artist-info">
-                    <span class="artist-name">Billie Eilish</span>
-                    <span class="details">Alternative Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">10</span>
-                <div class="artist-info">
-                    <span class="artist-name">Lady Gaga</span>
-                    <span class="details">Pop / Dance</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">11</span>
-                <div class="artist-info">
-                    <span class="artist-name">Marília Mendonça</span>
-                    <span class="details">Sertanejo / Sofrência</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">12</span>
-                <div class="artist-info">
-                    <span class="artist-name">Beyoncé</span>
-                    <span class="details">R&B / Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">13</span>
-                <div class="artist-info">
-                    <span class="artist-name">Dua Lipa</span>
-                    <span class="details">Pop / Dance-Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">14</span>
-                <div class="artist-info">
-                    <span class="artist-name">Nicki Minaj</span>
-                    <span class="details">Hip-Hop / Rap</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">15</span>
-                <div class="artist-info">
-                    <span class="artist-name">Sia</span>
-                    <span class="details">Pop / Indie Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">16</span>
-                <div class="artist-info">
-                    <span class="artist-name">Lana Del Rey</span>
-                    <span class="details">Alternative / Indie Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">17</span>
-                <div class="artist-info">
-                    <span class="artist-name">Selena Gomez</span>
-                    <span class="details">Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">18</span>
-                <div class="artist-info">
-                    <span class="artist-name">Sabrina Carpenter</span>
-                    <span class="details">Pop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">19</span>
-                <div class="artist-info">
-                    <span class="artist-name">Doja Cat</span>
-                    <span class="details">Pop / R&B / Hip-Hop</span>
-                </div>
-            </li>
-            <li class="artist-item">
-                <span class="rank">20</span>
-                <div class="artist-info">
-                    <span class="artist-name">Tyla</span>
-                    <span class="details">Amapiano / R&B</span>
-                </div>
-            </li>
-        </ul>
+<div class="dashboard-container">
+    <div class="header">
+        <div class="logo">REDMUSIC</div>
+        <h1>TOP 20 YOUTUBE 2025</h1>
+        <div class="status">Status: <span id="real-time-status">LIVE | Atualizando...</span></div>
     </div>
+
+    <ul id="ranking-list">
+        </ul>
+</div>
+
+<script>
+    // Lista base de artistas (com dados simulados)
+    const baseArtists = [
+        { name: 'Taylor Swift', genre: 'Pop / Country', streams: 15000000000 },
+        { name: 'BLACKPINK', genre: 'K-Pop / Grupo Feminino', streams: 14500000000 },
+        { name: 'Shakira', genre: 'Pop Latino / Dance', streams: 13000000000 },
+        { name: 'Ariana Grande', genre: 'Pop / R&B', streams: 12500000000 },
+        { name: 'Katy Perry', genre: 'Pop', streams: 11500000000 },
+        { name: 'Karol G', genre: 'Reggaeton / Urbano Latino', streams: 11000000000 },
+        { name: 'Rihanna', genre: 'R&B / Pop', streams: 10500000000 },
+        { name: 'Adele', genre: 'Soul / Pop', streams: 10000000000 },
+        { name: 'Billie Eilish', genre: 'Alternative Pop', streams: 9500000000 },
+        { name: 'Lady Gaga', genre: 'Pop / Dance', streams: 9000000000 },
+        { name: 'Marília Mendonça', genre: 'Sertanejo / Sofrência', streams: 8500000000 },
+        { name: 'Beyoncé', genre: 'R&B / Pop', streams: 8000000000 },
+        { name: 'Dua Lipa', genre: 'Pop / Dance-Pop', streams: 7500000000 },
+        { name: 'Nicki Minaj', genre: 'Hip-Hop / Rap', streams: 7000000000 },
+        { name: 'Sia', genre: 'Pop / Indie Pop', streams: 6500000000 },
+        { name: 'Lana Del Rey', genre: 'Alternative / Indie Pop', streams: 6000000000 },
+        { name: 'Selena Gomez', genre: 'Pop', streams: 5500000000 },
+        { name: 'Sabrina Carpenter', genre: 'Pop', streams: 5000000000 },
+        { name: 'Doja Cat', genre: 'Pop / R&B / Hip-Hop', streams: 4500000000 },
+        { name: 'Tyla', genre: 'Amapiano / R&B', streams: 4000000000 }
+    ];
+
+    // Variável para armazenar o estado anterior (para comparação de ranking)
+    let previousRanking = [];
+
+    // Função para simular a busca de dados em tempo real (Substituir pela chamada à API real)
+    function fetchRealTimeData() {
+        // Clonar a lista para modificá-la
+        let newArtists = JSON.parse(JSON.stringify(baseArtists));
+
+        // SIMULAÇÃO DE ATUALIZAÇÃO EM TEMPO REAL:
+        // Adiciona um pequeno valor aleatório às streams (o que causará a mudança de ranking)
+        newArtists.forEach(artist => {
+            // Adiciona entre 100 mil e 500 milhões de streams
+            artist.streams += Math.floor(Math.random() * 500000000) + 100000;
+        });
+
+        // Ordena a nova lista pelo número de streams (mais streams no topo)
+        newArtists.sort((a, b) => b.streams - a.streams);
+
+        return newArtists;
+    }
+
+    // Função para renderizar e atualizar a lista no DOM
+    function renderRanking(currentRanking) {
+        const listElement = document.getElementById('ranking-list');
+        listElement.innerHTML = ''; // Limpa a lista atual
+
+        currentRanking.forEach((artist, index) => {
+            const rank = index + 1;
+            const listItem = document.createElement('li');
+            listItem.className = 'artist-item';
+
+            // Verifica a mudança de ranking para aplicar classes de animação
+            let rankChangeClass = '';
+            if (previousRanking.length > 0) {
+                const previousIndex = previousRanking.findIndex(prev => prev.name === artist.name);
+                const previousRank = previousIndex + 1;
+
+                if (previousRank > rank) {
+                    rankChangeClass = 'rank-up animated-change'; // Subiu
+                } else if (previousRank < rank) {
+                    rankChangeClass = 'rank-down animated-change'; // Desceu
+                }
+            }
+            
+            listItem.classList.add(rankChangeClass);
+
+            // Formata o número de streams para um formato mais legível (ex: 12.5 B)
+            const formattedStreams = formatStreams(artist.streams);
+
+            listItem.innerHTML = `
+                <span class="rank-number">${String(rank).padStart(2, '0')}</span>
+                <div class="artist-info">
+                    <span class="artist-name">${artist.name}</span>
+                    <span class="artist-genre">${artist.genre}</span>
+                </div>
+                <span class="streams-count">${formattedStreams}</span>
+            `;
+
+            listElement.appendChild(listItem);
+        });
+
+        // Atualiza o ranking anterior para o próximo ciclo de comparação
+        previousRanking = currentRanking;
+
+        // Atualiza o status
+        document.getElementById('real-time-status').textContent = `LIVE | Atualizado: ${new Date().toLocaleTimeString('pt-BR')}`;
+    }
+
+    // Função auxiliar para formatar streams em Bilhões, Milhões, etc.
+    function formatStreams(num) {
+        if (num >= 1000000000) {
+            return (num / 1000000000).toFixed(1).replace('.', ',') + ' B';
+        }
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(1).replace('.', ',') + ' M';
+        }
+        return num.toLocaleString('pt-BR');
+    }
+
+    // Inicia a primeira renderização
+    const initialRanking = fetchRealTimeData();
+    renderRanking(initialRanking);
+
+    // Configura a atualização em tempo real (a cada 5 segundos)
+    setInterval(() => {
+        const newRanking = fetchRealTimeData();
+        renderRanking(newRanking);
+    }, 5000); // 5000 milissegundos = 5 segundos
+
+</script>
 </body>
 </html>
