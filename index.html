@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>REDMUSIC | Ranking Global de Artistas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <title>REDMUSIC | Global Ranking Data</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
     <style>
-        /* PALETA DE CORES: Cyberpunk Elegante */
+        /* PALETA: High-Contrast Minimalista (Preto, Branco, Azul Cobalt) */
         :root {
-            --color-dark-bg: #1A1A2E; /* Roxo Escuro/Noite */
-            --color-panel: #2C3857; /* Azul Petróleo Escuro */
-            --color-primary: #00FFFF; /* Ciano Neon (Destaque Principal) */
-            --color-secondary: #FFD700; /* Amarelo Dourado (Acento) */
-            --color-text: #E0E0F0;
-            --color-subtle: #8A9BA8;
-            --font-display: 'Orbitron', sans-serif;
-            --font-mono: 'Space Mono', monospace;
-            --shadow-glow: 0 0 10px rgba(0, 255, 255, 0.6);
-            --transition-speed: 0.3s;
+            --color-dark-bg: #0A0A0A; /* Preto Extremo */
+            --color-panel: #181818; /* Cinza Escuro Suave */
+            --color-accent: #00BFFF; /* Azul Cobalto (Principal) */
+            --color-text: #FFFFFF; /* Branco Puro */
+            --color-subtle: #9E9E9E; /* Cinza para detalhes */
+            --font-main: 'Inter', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --shadow-glow: 0 0 8px rgba(0, 191, 255, 0.4);
         }
 
         body {
-            font-family: var(--font-display);
+            font-family: var(--font-main);
             background-color: var(--color-dark-bg);
             color: var(--color-text);
             margin: 0;
-            padding: 60px 20px;
+            padding: 20px 10px; /* Reduzido o padding em mobile */
             display: flex;
             justify-content: center;
             min-height: 100vh;
@@ -33,38 +31,56 @@
 
         .dashboard-main {
             width: 100%;
-            max-width: 1000px;
+            max-width: 900px;
         }
 
         /* HEADER & LOGO */
         .header {
-            padding-bottom: 25px;
-            margin-bottom: 40px;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
             border-bottom: 1px solid var(--color-panel);
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+            flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
         }
 
         .logo {
-            font-family: var(--font-display);
-            font-size: 2.5em;
-            font-weight: 900;
-            color: var(--color-primary);
+            font-family: var(--font-main);
+            font-size: 2em;
+            font-weight: 800;
+            color: var(--color-accent);
             text-shadow: var(--shadow-glow);
-            letter-spacing: 5px;
+            letter-spacing: 1px;
         }
 
         .header-info h1 {
-            font-size: 1.8em;
-            font-weight: 500;
+            font-size: 1.2em; /* Reduzido para mobile */
+            font-weight: 600;
             margin: 0;
+            color: var(--color-text);
         }
 
         .update-status {
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: var(--color-subtle);
             font-family: var(--font-mono);
+            margin-top: 2px;
+        }
+        
+        /* Ajuste do Header para Mobile */
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                margin-bottom: 20px;
+            }
+            .header-info {
+                margin-top: 10px;
+            }
+            .logo {
+                font-size: 1.8em;
+            }
         }
 
         /* LISTA DE RANKING */
@@ -78,82 +94,89 @@
 
         .artist-item {
             display: grid;
-            grid-template-columns: 80px 4fr 1.5fr; /* Maior destaque para o Rank */
+            grid-template-columns: 50px 1fr 100px; /* Layout principal */
             align-items: center;
             background-color: var(--color-panel);
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(0, 255, 255, 0.1);
-            transition: all var(--transition-speed);
+            padding: 15px 20px;
+            border-radius: 6px;
+            border: 1px solid transparent;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            transition: all 0.2s;
         }
 
         .artist-item:hover {
-            transform: translateY(-4px);
-            background-color: #3C4A6E;
-            box-shadow: 0 6px 20px rgba(0, 255, 255, 0.2);
+            border-color: var(--color-accent);
+            background-color: #252525;
         }
         
         /* Destaque para o Top 3 */
         .artist-item:nth-child(-n+3) {
-            border-left: 5px solid var(--color-secondary); /* Borda Dourada */
+            border-left: 3px solid var(--color-accent);
         }
-        .artist-item:nth-child(1) .rank-number { color: var(--color-secondary); font-size: 2.2em; text-shadow: 0 0 10px var(--color-secondary); }
-        .artist-item:nth-child(2) .rank-number { color: #C0C0C0; font-size: 2.0em; }
-        .artist-item:nth-child(3) .rank-number { color: #CD7F32; font-size: 1.8em; }
+        .artist-item:nth-child(1) .rank-number { color: #FFD700; font-size: 2.2em; } /* Ouro */
+        .artist-item:nth-child(2) .rank-number { color: #C0C0C0; font-size: 2.0em; } /* Prata */
+        .artist-item:nth-child(3) .rank-number { color: #CD7F32; font-size: 1.8em; } /* Bronze */
 
 
         .rank-number {
             font-family: var(--font-mono);
             font-size: 1.6em;
-            font-weight: 700;
-            color: var(--color-primary);
-            text-align: left;
+            font-weight: 500;
+            color: var(--color-subtle);
+            text-align: center;
         }
 
         .artist-info {
             padding-left: 20px;
-            /* Linha vertical sutil para separação */
-            border-left: 1px dashed rgba(255, 255, 255, 0.1); 
         }
 
         .artist-name {
-            font-size: 1.3em;
-            font-weight: 700;
+            font-size: 1.1em;
+            font-weight: 800;
             color: var(--color-text);
             display: block;
         }
 
         .artist-genre {
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: var(--color-subtle);
-            font-family: 'Jost', sans-serif;
+            font-family: var(--font-main);
+            font-weight: 400;
         }
 
         .streams-count {
             font-family: var(--font-mono);
-            font-size: 1.1em;
-            font-weight: 700;
-            color: var(--color-secondary); /* Streams em Dourado */
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--color-accent);
             text-align: right;
-            border-left: 1px solid rgba(255, 215, 0, 0.2);
-            padding-left: 15px;
         }
 
-        /* Responsividade */
-        @media (max-width: 768px) {
-             .artist-item {
-                grid-template-columns: 50px 1fr 100px;
-                padding: 15px 15px;
+        /* RESPONSIVIDADE (Telas Menores) */
+        @media (max-width: 480px) {
+            .artist-item {
+                /* Layout para mobile: Rank | Nome/Gênero | Streams */
+                grid-template-columns: 40px 1fr 80px;
+                padding: 12px 10px;
             }
             .rank-number {
                 font-size: 1.4em;
             }
+            .artist-item:nth-child(1) .rank-number { font-size: 1.8em; } 
+            .artist-item:nth-child(2) .rank-number { font-size: 1.6em; } 
+            .artist-item:nth-child(3) .rank-number { font-size: 1.5em; } 
+            
             .artist-name {
-                font-size: 1.1em;
+                font-size: 1em;
+            }
+            .artist-genre {
+                font-size: 0.75em;
             }
             .streams-count {
                 font-size: 0.9em;
+            }
+            .artist-info {
+                padding-left: 10px;
             }
         }
     </style>
